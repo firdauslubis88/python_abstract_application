@@ -1,6 +1,8 @@
 from enum import Enum
 import operator
 import cexprtk
+import math
+import re
 
 relative = lambda landmark, shape: (int(landmark.x * shape[1]), int(landmark.y * shape[0]))
 relativeT = lambda landmark, shape: (int(landmark.x * shape[1]), int(landmark.y * shape[0]), 0)
@@ -50,7 +52,7 @@ def find_methods(cls, label):
 class RETURN_TYPE(Enum):
     PAIR_2D = 0
     PAIR_3D = 1
-    STRING = 2
+    DICTIONARY = 2
 
 #face_landmarks_name_to_idx_list = None
 #face_landmarks_idx_to_name_list = None
@@ -162,3 +164,18 @@ def get_frame_from_time(value: str, frame_fps):
         return None
     hour, minute, second = splitted_var
     return (60*60*int(hour) + 60*int(minute) + int(second)) * frame_fps
+
+def get_substring_before_first_digit_underscore_from_string(s1: str) -> str:
+    if s1 is None:
+        return None
+    m = re.search(r"\d", s1)
+    if m is None:
+        return s1
+    if m.start() > 0:
+        return s1[0:m.start()-1]
+    else:
+        return s1
+#    if m:
+#        print("Digit found at position", m.start())
+#    else:
+#        print("No digit in that string")    

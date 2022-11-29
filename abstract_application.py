@@ -25,7 +25,7 @@ from typing import List, Mapping, Optional, Tuple, Union
 from mediapipe.framework.formats import landmark_pb2
 import dataclasses
 
-import helpers
+from . import helpers
 
 _PRESENCE_THRESHOLD = 0.5
 _VISIBILITY_THRESHOLD = 0.5
